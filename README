@@ -1,0 +1,46 @@
+Name: Stuart Hamilton
+ID #: 1619864
+CMPUT 275 Winter 2021
+
+Assignment 1 Part 2
+
+Included Files:
+    * client directory containing:
+        * client.cpp
+    * server directory containing:
+        * digraph.cpp
+        * heap.h
+        * digraph.h
+        * dijkstra.h
+        * wdigraph.h
+        * server.cpp
+        * dijkstra.cpp
+    * Makefile
+    * README
+    * plotter
+
+Modified files:
+
+* server.cpp:
+
+    Included libraries and functions for implementing sockets and functions and cstrings, and defined a buffer and backlog size. All the other changes were made in the main function call.
+
+    Creates sockets to connect and listen to client, builds weighted directed graph from textfile including verticies and edges from an edmonton road map. Takes input points from client, finds closest points to the input points in the weighted directed graph, and implements dijkstra's algorithm to find the least cost route based on the manhattan distance. The waypoints for the route are then sent to the client and the server waits for the next input from client. Terminates when the client sends "Q\n".
+
+* client.cpp:
+
+    Included libraries and functions for implementing sockets and functions and cstrings, and defined two different buffer sizes. All the other changes were made in the main function call.
+
+    Creates an input pipe to read from the plotter, an output pipe to write to the plotter, and a socket to connect to the server. Takes in start and end points from the plotter then converts them to 100000th degrees and sends them to the server. Then the client reads in the waypoints sent from the server and writes them the plotter with the output pipe. Sends "E\n" to the plotter to indicate there are no more points and to wait for next input from plotter. Sends "Q\n" and erminates when "Q\n" is read from the plotter.
+
+Notes and Assumptions:
+
+    The other included files other than the README and makefile were not modified in any way from the starter code, and do not contain headers. The program should be run with the file edmonton-roads-2.0.1.txt in the main directory which contains vertices and edges of the edmonton map in a specific format. The plotter used is the old plotter that was given with the starter code from march 23. The server and client executables also output deugging information to stdout to display confirmation of data being sent or the data sent (can help to diagnose if there is an error with the 'N 1' case). There is also assumed to be a reliable connection between the server and client with no timeouts.
+
+Makefile targets:
+
+  The makefile's topmost target is all which has targets to generate the client and server executables. The target client generates the client executable in the client directory with the target client.o in the client directory, and the target client.o compiles client.cpp in the client directory. The target server generates an executable server and links digraph.o, server.o, digraph.h, dijkstra.o, dijkstra.h, and wdigraph.h in the server directory. There are also targets server.o, digraph.o, and dijkstra.o to compile their respective cpp files in the server directory. The last target is clean which removes the created objects, executables and pipes. 
+
+Running Instructions:
+	
+	The make command should be run to compile and link the execuables server in /server and client in /client. You may want to run make clean to clear any named pipes. To run the program on one machine, you must open three separate terminals in the main directory. In the first terminal you run ./server/server with an argument for the port number, then in the second terminal you run ./client/client with an argument for the port number and the ip address (127.0.0.1 for local host), and then in the third terminal you run ./plotter. The port number should be greater than 1024, and the same port number should be used as an argument for both server and client. You can then select two points on the plotter interface and the plotter will display the shortest driving route. To close the plotter, click the x on the top right of the window.
