@@ -3,11 +3,13 @@ ID #:
 CMPUT 275 Winter 2021
 Assignment 1 Part 2
 
-The plotter program is too large too upload to github, so a compressed version will be added.
+
 
 A further implementation of the Navigation System repo earlier with pipes connecting the client to a plotter, and sockets connecting the client and server.
 
 The program has been tested and implemented for a Ubuntu Linux vm image and compiled wtih c++11. Usage on other machines is not guaranteed to work.
+
+Plotter and program work with given edmonton road map.
 
 
 
