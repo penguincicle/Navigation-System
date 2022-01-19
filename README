@@ -1,9 +1,3 @@
-Name: Stuart Hamilton
-ID #: 
-CMPUT 275 Winter 2021
-Assignment 1 Part 2
-
-
 
 A further implementation of the Navigation System repo earlier with pipes connecting the client to a plotter, and sockets connecting the client and server.
 
